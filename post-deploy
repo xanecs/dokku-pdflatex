@@ -1,11 +1,11 @@
 #!/bin/bash
 APP="$1"
-IMAGE="app/$APP"
+IMAGE="dokku/$APP"
 
-if [[ "$APP" -eq "pdflatex" ]]; then
-  $id=$(docker run -i -a stdin app/$IMAGE /bin/bash -c "apt-get update && apt-get install -y texlive-full")
+if [[ "$APP" -eq "dlbs" ]]; then
+  $id=$(docker run -i -a stdin $IMAGE /bin/bash -c "apt-get update && apt-get install -y texlive-full rubber")
   test $(docker wait $id) -eq 0
   docker commit $id $IMAGE > /dev/null
 
-  echo "pdflatex installed"
+  echo "pdflatex/rubber installed"
 fi
